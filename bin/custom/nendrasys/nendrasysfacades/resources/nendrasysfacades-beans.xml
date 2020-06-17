@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+		<property name="genders" type="java.util.List&lt;com.nendrasys.facades.product.data.GenderData>"/>
+		<property name="FLAGS" type="java.lang.Boolean"/>
+		<property name="MANUFACTURINGDETAILS" type="java.util.List&lt;com.nendrasys.facades.product.data.ManufacturingDetailsData>"/>
+		<property name="customSEOKeyword" type="java.lang.String" />
+	</bean>
+
+	<bean class="com.nendrasys.facades.product.data.ManufacturingDetailsData">
+		<property name="company" type="java.lang.String"/>
+		<property name="country" type="de.hybris.platform.commercefacades.user.data.CountryData"/>
+		<property name="yearsInMarket" type="int"/>
+		<property name="rating" type="int"/>
+	</bean>
+
+	<bean class="com.nendrasys.facades.product.data.GenderData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<enum class="de.hybris.platform.commercefacades.product.ProductOption">
+		<value>FLAGS</value>
+		<value>MANUFACTURINGDETAILS</value>
+	</enum>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+		<property name="isBusinessUser" type="boolean"/>
+	</bean>
+
+	<!--Generate ProductRegisterdata-->
+	<bean class="com.nendrasys.facades.product.data.ProductRegisterData">
+		<property name="productId" type="java.lang.String"/>
+		<property name="quantityNeeded" type="int"/>
+		<property name="companyName" type="java.lang.String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.config.IndexedType">
+		<property name="userGroup" type="java.util.List&lt;de.hybris.platform.core.model.user.UserGroupModel>" />
+	</bean>
+
+	<bean class="de.hybris.platform.solrfacetsearch.config.IndexConfig">
+		<property name="userGroup" type="java.util.List&lt;de.hybris.platform.core.model.user.UserGroupModel>" />
+	</bean>
+
+	<bean class="com.nendrasys.facades.product.data.ManufacturingDetailsData">
+		<property name="canBeSold" type="java.lang.Boolean"/>
+	</bean>
+
+
+	<bean
+			class="de.hybris.platform.acceleratorservices.payment.data.CreateSubscriptionResult"
+			extends="de.hybris.platform.acceleratorservices.payment.data.AbstractPaymentResult">
+	<property name="responseCode" type="java.lang.String" />
+
+	</bean>
+
+	<enum class="de.hybris.platform.payment.dto.TransactionStatus">
+	<!-- When total amount is >4000  -->
+	<value>MANUAL_INTERVENTION_NEEDED</value>
+
+	</enum>
+
+	<!--<bean class="com.nendrasys.core.enventListener.OrderReceivedEvent" type="event"
+		  template="resources/pojo/OrderReceivedEvent-template.vm">
+		<property name="order" type="de.hybris.platform.core.model.order.OrderModel"/>
+	</bean>-->
+
+	<!--<bean class="de.hybris.platform.order.events.OrderReceivedEvent" type="event"
+		  template="resources/pojo/OrderReceivedEvent-template.vm">
+		<property name="order" type="de.hybris.platform.core.model.order.OrderModel"/>
+	</bean>
+-->
+
+
+</beans>

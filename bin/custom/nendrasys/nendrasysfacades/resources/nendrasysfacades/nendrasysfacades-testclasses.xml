@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testclasses><nendrasysfacades><testclass>com.nendrasys.facades.suggestion.impl.DefaultSimpleSuggestionFacadeTest</testclass><testclass>com.nendrasys.facades.suggestion.DefaultSimpleSuggestionFacadeIntegrationTest</testclass></nendrasysfacades></testclasses>

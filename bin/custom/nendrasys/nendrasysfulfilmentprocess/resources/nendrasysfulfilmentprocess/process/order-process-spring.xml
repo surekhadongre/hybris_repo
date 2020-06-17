@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+           
+    <context:annotation-config/>
+
+	<!-- Order Process Actions -->
+
+	<bean id="abstractOrderAction" class="com.nendrasys.fulfilmentprocess.actions.order.AbstractOrderAction"  abstract="true" parent="abstractAction">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<bean id="checkOrderAction" class="com.nendrasys.fulfilmentprocess.actions.order.CheckOrderAction"  parent="abstractAction">
+		<property name="checkOrderService" ref="checkOrderService"/>
+	</bean>
+
+	<bean id="cancelWholeOrderAuthorizationAction" class="com.nendrasys.fulfilmentprocess.actions.order.CancelWholeOrderAuthorizationAction"
+            parent="abstractAction">
+		<property name="paymentService" ref="paymentService"/>
+    </bean>
+
+	<bean id="sendOrderPlacedNotificationAction" class="com.nendrasys.fulfilmentprocess.actions.order.SendOrderPlacedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="takePaymentAction" class="com.nendrasys.fulfilmentprocess.actions.order.TakePaymentAction"  parent="abstractAction">
+		<property name="paymentService" ref="paymentService"/>
+    </bean>
+
+	<bean id="sendPaymentFailedNotificationAction" class="com.nendrasys.fulfilmentprocess.actions.order.SendPaymentFailedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="checkTransactionReviewStatusAction" class="com.nendrasys.fulfilmentprocess.actions.order.CheckTransactionReviewStatusAction"  parent="abstractAction">
+		<property name="ticketBusinessService" ref="ticketBusinessService"/>
+	</bean>
+
+	<bean id="fraudCheckOrderAction" class="com.nendrasys.fulfilmentprocess.actions.order.FraudCheckOrderAction"  parent="abstractOrderAction">
+		<property name="fraudService" ref="fraudService"/>
+		<property name="providerName" value="Mockup_3rdPartyProvider"/>
+	</bean>
+
+	<bean id="prepareOrderForManualCheckAction" class="com.nendrasys.fulfilmentprocess.actions.order.PrepareOrderForManualCheckAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="sendFraudErrorNotificationAction" class="com.nendrasys.fulfilmentprocess.actions.order.SendFraudErrorNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="checkAuthorizeOrderPaymentAction" class="com.nendrasys.fulfilmentprocess.actions.order.CheckAuthorizeOrderPaymentAction"  parent="abstractAction"/>
+
+	<bean id="sendAuthorizationFailedNotificationAction" class="com.nendrasys.fulfilmentprocess.actions.order.SendAuthorizationFailedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="reserveOrderAmountAction" class="com.nendrasys.fulfilmentprocess.actions.order.ReserveOrderAmountAction"  parent="abstractAction"/>
+
+	<bean id="fraudCheckOrderInternalAction" class="com.nendrasys.fulfilmentprocess.actions.order.FraudCheckOrderInternalAction"  parent="abstractOrderAction">
+		<property name="fraudService" ref="fraudService"/>
+		<property name="providerName" value="hybris"/>
+	</bean>
+
+	<bean id="orderManualCheckedAction" class="com.nendrasys.fulfilmentprocess.actions.order.OrderManualCheckedAction"  parent="abstractOrderAction"/>
+
+	<bean id="splitOrderAction" class="com.nendrasys.fulfilmentprocess.actions.order.SplitOrderAction"  parent="abstractAction">
+		<property name="orderSplittingService" ref="orderSplittingService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="subprocessesCompletedAction" class="com.nendrasys.fulfilmentprocess.actions.order.SubprocessesCompletedAction"  parent="abstractAction"/>
+
+	<bean id="setOrderExpirationTimeAction" class="com.nendrasys.fulfilmentprocess.actions.order.SetOrderExpirationTimeAction"  parent="abstractAction">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+	
+	<bean id="sendOrderCompletedNotificationAction" class="com.nendrasys.fulfilmentprocess.actions.order.SendOrderCompletedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="scheduleForCleanUpAction" class="com.nendrasys.fulfilmentprocess.actions.order.ScheduleForCleanUpAction"  parent="abstractAction">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<bean id="notifyCustomerAboutFraudAction" class="com.nendrasys.fulfilmentprocess.actions.order.NotifyCustomerAboutFraudAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="orderReceivedEmailNotificationAction" class="com.nendrasys.fulfilmentprocess.actions.orderReceived.OrderReceivedEmailNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="nendrasysTakePaymentAction" class="com.nendrasys.fulfilmentprocess.actions.order.NendrasysTakePaymentAction" parent="abstractAction">
+		<property name="paymentService" ref="paymentService"></property>
+	</bean>
+
+	<bean id="manualInterventionNeededAction" class="com.nendrasys.fulfilmentprocess.actions.order.ManualInterventionNeededAction" parent="abstractAction"></bean>
+
+
+</beans>

@@ -1,0 +1,5 @@
+INSERT_UPDATE ProductRegistration;productId[unique=true];quantityNeeded;companyName[unique=true]
+;1001;10;Maark
+;1002;8;Shark
+;1002;9;Maark
+;1002;8;aaaaa

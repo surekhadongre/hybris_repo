@@ -1,0 +1,2 @@
+﻿## messageSource=classpath:/nendrasyscore/messages/email-orderReceived_$lang.properties
+${ctx.messages.getMessage('emailSubject', ${ctx.order.code})}

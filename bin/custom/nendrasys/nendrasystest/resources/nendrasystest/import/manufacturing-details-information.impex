@@ -1,0 +1,39 @@
+
+INSERT_UPDATE ManufacturingDetails;company[unique=true];country(isocode)[unique=true];yearsInMarket;rating
+;atlanta;KH;1995;8
+;nicon;AU;1985;7
+;canon;JP;1937;9
+;sony;US;1945;9
+;fujifilm;CN;1975;5
+;leica;FI;2003;4
+;hasselbald;ID;2002;3
+;panasonic;IE;1990;7
+;olympus;IR;1999;5
+;pentax;IS;2001;4
+;lumix;IT;2011;3
+;mamiya;MM;2015;7
+;sigma;PK;2013;8
+;rocoh;PL;2017;2
+;minolta;PE;1928;8
+;toshiba;RO;1950;9
+;estaman code;RU;2018;5
+;yashica;SG;2011;4
+;casio;SZ;2001;7
+;jvc;TR;2004;6
+;sanyo;RS;2009;3
+;lg electronics;SA;1975;9
+;vivitar;ZA;2000;7
+;rca;KW;1965;8
+;aiptek inc;PS;1987;8
+;otek;SZ;2003;4
+;comcast;OM;2002;8
+;game;LK;2003;9
+;gopro;BR;2002;7
+;honeywell;IN;1975;9
+;royal electronics;UY;2019;6
+;shree camera;UZ;2018;2
+;tirupati electronics;YT;1985;6
+;ashu Electronics;WS;1986;1
+;harsh Camera;VG;2015;4
+;jeeva com;VN;1958;2
+;balaji electronics;VI;1915;3
