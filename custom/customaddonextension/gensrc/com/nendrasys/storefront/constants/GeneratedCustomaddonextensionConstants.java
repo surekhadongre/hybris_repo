@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 29, 2020, 4:51:15 PM                    ---
+ * --- Generated at Jun 18, 2020, 1:44:34 PM                    ---
  * ----------------------------------------------------------------
  */
 package com.nendrasys.storefront.constants;
