@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!--
+	The hybris platform provides one single Spring application context for beans located at the jalo layer.
+	Each extension can add beans to this context by specifying them at this configuration file.
+	 
+	You can use and/or redefine beans defined at configuration files of other extensions as well as
+	adding new one.
+		
+	If you want to locate this file at a different location or want to use several files for better,
+	structuring, please use the '<yourextension>.application-context' property at your project.properties file.
+	There you can specify a comma separated list of files where first is tried to find a file per classpath and
+	then per file system.
+
+	
+	If you want to configure beans for your web module please have a look at
+	your web/webroot/WEB-INF/<extname>-web-spring.xml.
+	-->
+	
+	<!--  Example how to override a manager -->
+	<!--
+	<bean id="core.productManager"   class="com.nendrasys.jalo.NendrasyspaymentProductManager" 	init-method="init"	destroy-method="destroy" />
+	-->
+	
+	
+ 	<!--  Example how to configure the class to use for jalo session creation -->
+	<!--
+	<bean id="jalosession"   class="de.hybris.platform.jalo.JaloSessionFactory">
+		<property name="targetClassName" value="com.nendrasys.jalo.NendrasyspaymentJaloSession"/>
+	</bean>
+	-->
+
+	
+	<!--  Example how to override an item  -->
+	<!-- 
+	<bean id="de.hybris.platform.jalo.product.Product" class="com.nendrasys.jalo.NendrasyspaymentProduct" scope="prototype" />		
+ 	-->
+
+	<!--  
+	 Example how to register and use an AOP aspect 
+     Also see http://static.springframework.org/spring/docs/2.5.x/reference/aop.html	
+     -->
+	
+	<!-- 
+	<bean id="nendrasyspaymentProfBean" class="com.nendrasys.aop.NendrasyspaymentProfilingAspect"/>
+	<aop:config proxy-target-class="true">
+  		<aop:aspect id="nendrasyspaymentProfAspect" ref="nendrasyspaymentProfBean" >
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="execution(* getModificationTime(..))" />  	            
+	   		<aop:around pointcut-ref="profiledMethods" method="profile" />
+  		</aop:aspect>
+	</aop:config>
+	 -->
+
+	
+	<!-- some other examples of a pointcut that matches everything:
+
+    	  <aop:pointcut id="profiledMethods" 
+	      	expression="bean(de.hybris.platform.jalo.user.Customer) &amp;&amp; 
+	      	            !execution(* getPK(..))" />  	            
+	       <aop:pointcut id="profiledMethods" expression="execution(* *(..))" />	
+	  -->
+	
+    <bean id="nendrasyspaymentSystemSetup" class="com.nendrasys.setup.NendrasyspaymentSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="nendrasyspaymentService"/>
+    </bean>
+
+    <bean id="nendrasyspaymentService" class="com.nendrasys.service.impl.DefaultNendrasyspaymentService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+    <!-- Payment mockup implementation -->
+    <bean name="mockupCommandFactory" class="de.hybris.platform.payment.commands.factory.impl.DefaultCommandFactoryImpl" >
+        <property name="paymentProvider" value="Mockup"/>
+        <property name="commands">
+            <map>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.IsApplicableCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.IsApplicableMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.AuthorizationCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.AuthorizationMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.SubscriptionAuthorizationCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.SubscriptionAuthorizationMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.CaptureCommand</value>
+                    </key>
+                    <bean class="com.nendrasys.payment.commands.impl.CustomCaptureMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.PartialCaptureCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.PartialCaptureMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.EnrollmentCheckCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.EnrollmentCheckMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.VoidCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.VoidMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.FollowOnRefundCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.FollowOnRefundMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.StandaloneRefundCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.StandaloneRefundMockCommand" />
+                </entry>
+
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.CreateSubscriptionCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.CreateSubscriptionMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.DeleteSubscriptionCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.DeleteSubscriptionMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.GetSubscriptionDataCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.GetSubscriptionDataMockCommand" />
+                </entry>
+                <entry>
+                    <key>
+                        <value type="java.lang.Class">de.hybris.platform.payment.commands.UpdateSubscriptionCommand</value>
+                    </key>
+                    <bean class="de.hybris.platform.payment.commands.impl.UpdateSubscriptionMockCommand" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+			
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ Copyright (c) 2019 SAP SE or an SAP affiliate company. All rights reserved.
+--><extensioninfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="extensioninfo.xsd">
+           
+    
+    <extension abstractclassprefix="Generated" classprefix="Nendrasyspayment" jaloLogicFree="true" managername="NendrasyspaymentManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="nendrasyspayment" usemaven="false">
+                  
+      
+        
+        <!-- for more information on maven managed libraries please consult https://wiki.hybris.com/x/Nq8sDQ -->
+                               
+      
+        
+        <!-- you should add all required extensions to this list, except platform extensions which are automatically required -->
+                         
+      
+        
+        <!-- <requires-extension name="cms"/> -->
+                         
+      
+        <requires-extension name="commerceservices"/>
+      
+        
+        <coremodule generated="true" manager="com.nendrasys.jalo.NendrasyspaymentManager" packageroot="com.nendrasys"/>
+                      
+        
+        <webmodule jspcompile="false" webroot="/nendrasyspayment"/>
+                					
+	
+        
+           
+    
+    </extension>
+              
+
+
+</extensioninfo>
